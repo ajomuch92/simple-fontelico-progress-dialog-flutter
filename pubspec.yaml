@@ -1,8 +1,7 @@
 name: simple_fontellico_progress_dialog
 description: A simple progress dialog with custom icons.
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/ajomuch92/simple-fontelico-progress-dialog-flutter
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
