@@ -1,14 +1,58 @@
-# simple_fontellico_progress_dialog
+# Simple Fontellico Progress Dialog
 
-A new Flutter package project.
+This package helps to render a progress dialog window with different types of loading indicator.
 
-## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+## Instalation
+Include `simple_fontellico_progress_dialog` in your `pubspec.yaml` file:
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  simple_fontellico_progress_dialog: version
+```
+
+<img src="https://raw.githubusercontent.com/ajomuch92/simple-fontelico-progress-dialog-flutter/master/assets/demo.gif" width="200" height="429"/>
+
+## Usage
+
+To use this package, just import it into your file, create a new instance, pass the context as parameter.
+
+```dart
+import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
+
+...
+
+SimpleFontelicoProgressDialog _dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
+...
+
+void showDialog() async{
+  _dialog.show(message: 'Loading...', type: type);
+  await Future.delayed(Duration(seconds: 1));
+  _dialog.hide();
+}
+
+...
+
+```
+
+### Constructor
+|  Name | Description   | Required   | Default   |
+| ------------ | ------------ | ------------ | ------------ |
+| context  | Buildcontext to render the dialog | True   |   |
+| barrierDimisable  | Boolean value to indicate barrierDimisable on dialog |  True  |   |
+
+To show a dialog, use the show method, to hide it, use the hide method. Simple like that.
+### Properties used on show method
+
+|  Name | Description   | Required   | Default   |
+| ------------ | ------------ | ------------ | ------------ |
+| message  | String to indicate a message into the dialog | True   |   |
+| type  | Simple dialog type (normal, threeline, multiline, refresh, hurricane, phoenix, iphone) |  False  |  normal |
+| width  | Double value to indicate the dialog width | False   | 100 |
+| height  | Double value to indicate the dialog height | False   | 120  |
+| elevation  | Double value to indicate the dialog elevation| False   |  5.0 |
+| radius  | Double value to indicate the dialog border radius | False   |  5.0 |
+| backgroundColor  | Double value to indicate the dialog background color | False   | Colors.white  |
+
