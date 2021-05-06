@@ -32,32 +32,56 @@ class SimpleFontelicoProgressDialog {
       case SimpleFontelicoProgressDialogType.threelines:
         return RotateIcon(
           duration: Duration(milliseconds: 1000),
-          child: Icon(Fontelico.threelines, color: Colors.blue[600], size: 40.0,),
+          child: Icon(
+            Fontelico.threelines,
+            color: Colors.blue[600],
+            size: 40.0,
+          ),
         );
       case SimpleFontelicoProgressDialogType.multilines:
         return RotateIcon(
           duration: Duration(milliseconds: 1000),
-          child: Icon(Fontelico.multilines, color: Colors.blue[600], size: 40.0,),
+          child: Icon(
+            Fontelico.multilines,
+            color: Colors.blue[600],
+            size: 40.0,
+          ),
         );
       case SimpleFontelicoProgressDialogType.refresh:
         return RotateIcon(
           duration: Duration(milliseconds: 1000),
-          child: Icon(Fontelico.refresh, color: Colors.blue[600], size: 40.0,),
+          child: Icon(
+            Fontelico.refresh,
+            color: Colors.blue[600],
+            size: 40.0,
+          ),
         );
       case SimpleFontelicoProgressDialogType.hurricane:
         return RotateIcon(
           duration: Duration(milliseconds: 1000),
-          child: Icon(Fontelico.hurricane, color: Colors.blue[600], size: 40.0,),
+          child: Icon(
+            Fontelico.hurricane,
+            color: Colors.blue[600],
+            size: 40.0,
+          ),
         );
       case SimpleFontelicoProgressDialogType.iphone:
         return RotateIcon(
           duration: Duration(milliseconds: 1000),
-          child: Icon(Fontelico.iphone, color: Colors.blue[600], size: 40.0,),
+          child: Icon(
+            Fontelico.iphone,
+            color: Colors.blue[600],
+            size: 40.0,
+          ),
         );
       case SimpleFontelicoProgressDialogType.phoenix:
         return RotateIcon(
           duration: Duration(milliseconds: 1000),
-          child: Icon(Fontelico.phoenix, color: Colors.blue[600], size: 40.0,),
+          child: Icon(
+            Fontelico.phoenix,
+            color: Colors.blue[600],
+            size: 40.0,
+          ),
         );
       case SimpleFontelicoProgressDialogType.normal:
       default:
@@ -69,12 +93,13 @@ class SimpleFontelicoProgressDialog {
   /// type: Simple dialog type (normal, threeline, multiline, refresh, hurricane, phoenix, iphone)
   /// height: Double value to indicate the dialog height
   /// width: Double value to indicate the dialog width
-  /// radius: Double value to indicate the dialog border radius 
-  /// elevation: Double value to indicate the dialog elevation 
-  /// backgroundColor: Double value to indicate the dialog background color 
+  /// radius: Double value to indicate the dialog border radius
+  /// elevation: Double value to indicate the dialog elevation
+  /// backgroundColor: Double value to indicate the dialog background color
   void show({
     @required String message,
-    SimpleFontelicoProgressDialogType type = SimpleFontelicoProgressDialogType.normal,
+    SimpleFontelicoProgressDialogType type =
+        SimpleFontelicoProgressDialogType.normal,
     double height = 100,
     double width = 120,
     double radius = 5.0,
@@ -84,43 +109,45 @@ class SimpleFontelicoProgressDialog {
     assert(context != null, 'Context must not be null');
     _isOpen = true;
     showDialog(
-      context: context,
-      barrierDismissible: barrierDimisable,
-      useSafeArea: true,
-      builder: (context) {
-        return Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.all(0.0),
-          child: Center(
-            child: Container(
-              height: height,
-              width: width,
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: BorderRadius.all(Radius.circular(radius))
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _getLoadingIndicator(type),
-                  SizedBox(height: 10,),
-                  Text(message, style: TextStyle(fontSize: 14),)
-                ],
+        context: context,
+        barrierDismissible: barrierDimisable,
+        useSafeArea: true,
+        builder: (context) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            insetPadding: EdgeInsets.all(0.0),
+            child: Center(
+              child: Container(
+                height: height,
+                width: width,
+                decoration: BoxDecoration(
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.all(Radius.circular(radius))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _getLoadingIndicator(type),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      message,
+                      style: TextStyle(fontSize: 14),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      }
-    );
+          );
+        });
   }
 
   /// Method to hide the dialog
   void hide() {
-    if(_isOpen) {
+    if (_isOpen) {
       Navigator.of(context).pop();
     }
   }
 }
-

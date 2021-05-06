@@ -7,10 +7,12 @@ class RotateIcon extends StatefulWidget {
   RotateIcon({Key key, this.child, this.duration}) : super(key: key);
 
   @override
-  _RotateIconState createState() => _RotateIconState(child: child, duration: duration);
+  _RotateIconState createState() =>
+      _RotateIconState(child: child, duration: duration);
 }
 
-class _RotateIconState extends State<RotateIcon> with SingleTickerProviderStateMixin {
+class _RotateIconState extends State<RotateIcon>
+    with SingleTickerProviderStateMixin {
   /// Controller to animate the children
   AnimationController _animationController;
 
@@ -21,7 +23,7 @@ class _RotateIconState extends State<RotateIcon> with SingleTickerProviderStateM
   final Duration duration;
 
   _RotateIconState({this.child, this.duration = const Duration(seconds: 1)});
-  
+
   @override
   void initState() {
     super.initState();
@@ -33,7 +35,7 @@ class _RotateIconState extends State<RotateIcon> with SingleTickerProviderStateM
   }
 
   @override
-  void dispose(){
+  void dispose() {
     _animationController.dispose();
     super.dispose();
   }
