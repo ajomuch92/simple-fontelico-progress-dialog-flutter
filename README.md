@@ -55,4 +55,5 @@ To show a dialog, use the show method, to hide it, use the hide method. Simple l
 | elevation  | Double value to indicate the dialog elevation| False   |  5.0 |
 | radius  | Double value to indicate the dialog border radius | False   |  5.0 |
 | backgroundColor  | Double value to indicate the dialog background color | False   | Colors.white  |
+| duration  | Duration value to animate loading indicator | False   | 1000 miliseconds  |
 

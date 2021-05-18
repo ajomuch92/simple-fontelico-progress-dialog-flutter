@@ -24,14 +24,20 @@ class SimpleFontelicoProgressDialog {
   /// Bool value to indicate the barrierDismisable of the dialog
   final bool? barrierDimisable;
 
-  SimpleFontelicoProgressDialog({this.context, this.barrierDimisable});
+  /// Duration for animation
+  final Duration? duration;
+
+  SimpleFontelicoProgressDialog(
+      {this.context,
+      this.barrierDimisable,
+      this.duration = const Duration(milliseconds: 1000)});
 
   /// Method to render the widget into the dialog
   Widget _getLoadingIndicator(SimpleFontelicoProgressDialogType type) {
     switch (type) {
       case SimpleFontelicoProgressDialogType.threelines:
         return RotateIcon(
-          duration: Duration(milliseconds: 1000),
+          duration: this.duration,
           child: Icon(
             Fontelico.threelines,
             color: Colors.blue[600],
@@ -40,7 +46,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.multilines:
         return RotateIcon(
-          duration: Duration(milliseconds: 1000),
+          duration: this.duration,
           child: Icon(
             Fontelico.multilines,
             color: Colors.blue[600],
@@ -49,7 +55,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.refresh:
         return RotateIcon(
-          duration: Duration(milliseconds: 1000),
+          duration: this.duration,
           child: Icon(
             Fontelico.refresh,
             color: Colors.blue[600],
@@ -58,7 +64,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.hurricane:
         return RotateIcon(
-          duration: Duration(milliseconds: 1000),
+          duration: this.duration,
           child: Icon(
             Fontelico.hurricane,
             color: Colors.blue[600],
@@ -67,7 +73,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.iphone:
         return RotateIcon(
-          duration: Duration(milliseconds: 1000),
+          duration: this.duration,
           child: Icon(
             Fontelico.iphone,
             color: Colors.blue[600],
@@ -76,7 +82,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.phoenix:
         return RotateIcon(
-          duration: Duration(milliseconds: 1000),
+          duration: this.duration,
           child: Icon(
             Fontelico.phoenix,
             color: Colors.blue[600],
