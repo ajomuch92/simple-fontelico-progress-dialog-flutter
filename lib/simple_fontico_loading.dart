@@ -19,10 +19,10 @@ class SimpleFontelicoProgressDialog {
   bool _isOpen = false;
 
   /// Context to render the dialog
-  BuildContext context;
+  BuildContext? context;
 
   /// Bool value to indicate the barrierDismisable of the dialog
-  final bool barrierDimisable;
+  final bool? barrierDimisable;
 
   SimpleFontelicoProgressDialog({this.context, this.barrierDimisable});
 
@@ -97,7 +97,7 @@ class SimpleFontelicoProgressDialog {
   /// elevation: Double value to indicate the dialog elevation
   /// backgroundColor: Double value to indicate the dialog background color
   void show({
-    @required String message,
+    @required String? message,
     SimpleFontelicoProgressDialogType type =
         SimpleFontelicoProgressDialogType.normal,
     double height = 100,
@@ -109,8 +109,8 @@ class SimpleFontelicoProgressDialog {
     assert(context != null, 'Context must not be null');
     _isOpen = true;
     showDialog(
-        context: context,
-        barrierDismissible: barrierDimisable,
+        context: context!,
+        barrierDismissible: barrierDimisable!,
         useSafeArea: true,
         builder: (context) {
           return Dialog(
@@ -133,7 +133,7 @@ class SimpleFontelicoProgressDialog {
                       height: 10,
                     ),
                     Text(
-                      message,
+                      message!,
                       style: TextStyle(fontSize: 14),
                     )
                   ],
@@ -147,7 +147,7 @@ class SimpleFontelicoProgressDialog {
   /// Method to hide the dialog
   void hide() {
     if (_isOpen) {
-      Navigator.of(context).pop();
+      Navigator.of(context!).pop();
     }
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 class Fontelico {
   Fontelico._();
 
-  static const _kFontFam = 'Fontelico';
+  static const String? _kFontFam = 'Fontelico';
 
   /// IconData for threelines icon
   static const IconData threelines = IconData(0xe830,
