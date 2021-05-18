@@ -44,49 +44,49 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(
               onPressed: (){
-                _showDialog(context, SimpleFontelicoProgressDialogType.normal);
+                _showDialog(context, SimpleFontelicoProgressDialogType.normal, 'Normal');
               }, 
               child: Text('Normal'),
             ),
             SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
-                _showDialog(context, SimpleFontelicoProgressDialogType.threelines);
+                _showDialog(context, SimpleFontelicoProgressDialogType.threelines, 'Three Lines');
               }, 
               child: Text('Three Lines'),
             ),
             SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
-                _showDialog(context, SimpleFontelicoProgressDialogType.multilines);
+                _showDialog(context, SimpleFontelicoProgressDialogType.multilines, 'Multilines');
               }, 
               child: Text('Multilines'),
             ),
             SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
-                _showDialog(context, SimpleFontelicoProgressDialogType.refresh);
+                _showDialog(context, SimpleFontelicoProgressDialogType.refresh, 'Refresh');
               }, 
               child: Text('Refresh'),
             ),
             SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
-                _showDialog(context, SimpleFontelicoProgressDialogType.phoenix);
+                _showDialog(context, SimpleFontelicoProgressDialogType.phoenix, 'Phoenix');
               }, 
               child: Text('Phoenix'),
             ),
             SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
-                _showDialog(context, SimpleFontelicoProgressDialogType.hurricane);
+                _showDialog(context, SimpleFontelicoProgressDialogType.hurricane, 'Hurricane');
               }, 
               child: Text('Hurricane'),
             ),
             SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
-                _showDialog(context, SimpleFontelicoProgressDialogType.iphone);
+                _showDialog(context, SimpleFontelicoProgressDialogType.iphone, 'Iphone');
               }, 
               child: Text('Iphone'),
             ),
@@ -98,11 +98,11 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _showDialog(BuildContext context, SimpleFontelicoProgressDialogType type) async{
+  void _showDialog(BuildContext context, SimpleFontelicoProgressDialogType type, String text) async{
     if(_dialog == null) {
       _dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
     }
-    _dialog.show(message: 'Loading...', type: type);
+    _dialog.show(message: text, type: type);
     await Future.delayed(Duration(seconds: 1));
     _dialog.hide();
   }
