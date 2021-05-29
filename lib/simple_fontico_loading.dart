@@ -102,6 +102,8 @@ class SimpleFontelicoProgressDialog {
   /// radius: Double value to indicate the dialog border radius
   /// elevation: Double value to indicate the dialog elevation
   /// backgroundColor: Double value to indicate the dialog background color
+  /// horizontal: Boolean value to indicate if loading has to show on horizontal
+  /// separation: Double value to indicate the separation between loading and text
   void show({
     @required String? message,
     SimpleFontelicoProgressDialogType type =
@@ -111,6 +113,8 @@ class SimpleFontelicoProgressDialog {
     double radius = 5.0,
     double elevation = 5.0,
     Color backgroundColor = Colors.white,
+    bool horizontal = false,
+    double separation = 10.0,
   }) {
     assert(context != null, 'Context must not be null');
     _isOpen = true;
@@ -129,21 +133,21 @@ class SimpleFontelicoProgressDialog {
                 decoration: BoxDecoration(
                     color: backgroundColor,
                     borderRadius: BorderRadius.all(Radius.circular(radius))),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _getLoadingIndicator(type),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      message!,
-                      style: TextStyle(fontSize: 14),
-                    )
-                  ],
-                ),
+                child: !horizontal
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children:
+                            _getChildren(type, message, horizontal, separation),
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children:
+                            _getChildren(type, message, horizontal, separation),
+                      ),
               ),
             ),
           );
@@ -155,5 +159,23 @@ class SimpleFontelicoProgressDialog {
     if (_isOpen) {
       Navigator.of(context!).pop();
     }
+  }
+
+  List<Widget> _getChildren(SimpleFontelicoProgressDialogType type,
+      String? message, bool horizontal, double separation) {
+    return [
+      _getLoadingIndicator(type),
+      !horizontal
+          ? SizedBox(
+              height: separation,
+            )
+          : SizedBox(
+              width: separation,
+            ),
+      Text(
+        message!,
+        style: TextStyle(fontSize: 14),
+      )
+    ];
   }
 }

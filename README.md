@@ -1,4 +1,4 @@
-# Simple Fontellico Progress Dialog
+# Simple Fontellico Progress Dialog ⌛
 
 This package helps to render a progress dialog window with different types of loading indicator.
 
@@ -12,8 +12,11 @@ dependencies:
     sdk: flutter
   simple_fontellico_progress_dialog: version
 ```
-
+### Demo Vertical Mode
 <img src="https://raw.githubusercontent.com/ajomuch92/simple-fontelico-progress-dialog-flutter/master/assets/demo.gif" width="200" height="429"/>
+
+### Demo Horizontal Mode
+<img src="https://raw.githubusercontent.com/ajomuch92/simple-fontelico-progress-dialog-flutter/master/assets/demo-horizontal.gif" width="200" height="429"/>
 
 ## Usage
 
@@ -56,4 +59,6 @@ To show a dialog, use the show method, to hide it, use the hide method. Simple l
 | radius  | Double value to indicate the dialog border radius | False   |  5.0 |
 | backgroundColor  | Double value to indicate the dialog background color | False   | Colors.white  |
 | duration  | Duration value to animate loading indicator | False   | 1000 miliseconds  |
+| horizontal  | Boolean value to indicate if loading has to show on horizontal | False   | false |
+| separation  | Double value to indicate the separation between loading and text | False   | 10.0 |
 
