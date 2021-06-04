@@ -18,6 +18,12 @@ class SimpleFontelicoProgressDialog {
   /// Value to indicate if dialog is open
   bool _isOpen = false;
 
+  /// String to set the message on the dialog
+  String? _message = '';
+
+  /// StateSetter to make available the function to update message text inside an opened dialog
+  StateSetter? _setState;
+
   /// Context to render the dialog
   BuildContext? context;
 
@@ -104,52 +110,58 @@ class SimpleFontelicoProgressDialog {
   /// backgroundColor: Double value to indicate the dialog background color
   /// horizontal: Boolean value to indicate if loading has to show on horizontal
   /// separation: Double value to indicate the separation between loading and text
-  void show({
-    @required String? message,
-    SimpleFontelicoProgressDialogType type =
-        SimpleFontelicoProgressDialogType.normal,
-    double height = 100,
-    double width = 120,
-    double radius = 5.0,
-    double elevation = 5.0,
-    Color backgroundColor = Colors.white,
-    bool horizontal = false,
-    double separation = 10.0,
-  }) {
+  /// textStyle: Style to customize the text inside dialog
+  void show(
+      {@required String? message,
+      SimpleFontelicoProgressDialogType type =
+          SimpleFontelicoProgressDialogType.normal,
+      double height = 100,
+      double width = 120,
+      double radius = 5.0,
+      double elevation = 5.0,
+      Color backgroundColor = Colors.white,
+      bool horizontal = false,
+      double separation = 10.0,
+      TextStyle textStyle = const TextStyle(fontSize: 14)}) {
     assert(context != null, 'Context must not be null');
     _isOpen = true;
+    _message = message;
     showDialog(
         context: context!,
         barrierDismissible: barrierDimisable!,
         useSafeArea: true,
-        builder: (context) {
+        builder: (BuildContext context) {
           return Dialog(
             backgroundColor: Colors.transparent,
             insetPadding: EdgeInsets.all(0.0),
-            child: Center(
-              child: Container(
-                height: height,
-                width: width,
-                decoration: BoxDecoration(
-                    color: backgroundColor,
-                    borderRadius: BorderRadius.all(Radius.circular(radius))),
-                child: !horizontal
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children:
-                            _getChildren(type, message, horizontal, separation),
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children:
-                            _getChildren(type, message, horizontal, separation),
-                      ),
-              ),
-            ),
+            child: StatefulBuilder(
+                builder: (BuildContext _, StateSetter setState) {
+              _setState = setState;
+              return Center(
+                child: Container(
+                  height: height,
+                  width: width,
+                  decoration: BoxDecoration(
+                      color: backgroundColor,
+                      borderRadius: BorderRadius.all(Radius.circular(radius))),
+                  child: !horizontal
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: _getChildren(type, _message, horizontal,
+                              separation, textStyle),
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: _getChildren(type, _message, horizontal,
+                              separation, textStyle),
+                        ),
+                ),
+              );
+            }),
           );
         });
   }
@@ -158,11 +170,25 @@ class SimpleFontelicoProgressDialog {
   void hide() {
     if (_isOpen) {
       Navigator.of(context!).pop();
+      _isOpen = false;
     }
   }
 
-  List<Widget> _getChildren(SimpleFontelicoProgressDialogType type,
-      String? message, bool horizontal, double separation) {
+  /// Method to update the message text when dialog is open
+  void updateMessageText(String message) {
+    if (_isOpen && _setState != null) {
+      _setState!(() {
+        _message = message;
+      });
+    }
+  }
+
+  List<Widget> _getChildren(
+      SimpleFontelicoProgressDialogType type,
+      String? message,
+      bool horizontal,
+      double separation,
+      TextStyle textStyle) {
     return [
       _getLoadingIndicator(type),
       !horizontal
@@ -174,7 +200,7 @@ class SimpleFontelicoProgressDialog {
             ),
       Text(
         message!,
-        style: TextStyle(fontSize: 14),
+        style: textStyle,
       )
     ];
   }

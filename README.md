@@ -61,4 +61,10 @@ To show a dialog, use the show method, to hide it, use the hide method. Simple l
 | duration  | Duration value to animate loading indicator | False   | 1000 miliseconds  |
 | horizontal  | Boolean value to indicate if loading has to show on horizontal | False   | false |
 | separation  | Double value to indicate the separation between loading and text | False   | 10.0 |
+| textStyle  | Style to customize the text inside dialog | False   | TextStyle(fontSize: 14) |
 
+### Properties used on updateMessageText method
+
+|  Name | Description   | Required   | Default   |
+| ------------ | ------------ | ------------ | ------------ |
+| message  | String to update the message inside an opened dialgo | True   |   |

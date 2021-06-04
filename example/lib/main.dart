@@ -103,6 +103,8 @@ class _MyHomePageState extends State<MyHomePage> {
       _dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
     }
     _dialog.show(message: text, type: type, horizontal: true, width: 150.0, height: 75.0);
+    await Future.delayed(Duration(seconds: 2));
+    _dialog.updateMessageText('Updating...');
     await Future.delayed(Duration(seconds: 1));
     _dialog.hide();
   }
