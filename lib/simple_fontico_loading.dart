@@ -134,8 +134,9 @@ class SimpleFontelicoProgressDialog {
       bool hideText = false,
       Widget? loadingIndicator}) {
     assert(context != null, 'Context must not be null');
-    if(type == SimpleFontelicoProgressDialogType.custom) {
-      assert(loadingIndicator != null, 'Loading indicator must not be null when is custom');
+    if (type == SimpleFontelicoProgressDialogType.custom) {
+      assert(loadingIndicator != null,
+          'Loading indicator must not be null when is custom');
       _customLoadingIndicator = loadingIndicator;
     }
     _isOpen = true;
@@ -204,10 +205,8 @@ class SimpleFontelicoProgressDialog {
       double separation,
       TextStyle textStyle,
       bool hideText) {
-    if(hideText) {
-      return [
-        _getLoadingIndicator(type)
-      ];
+    if (hideText) {
+      return [_getLoadingIndicator(type)];
     }
     return [
       _getLoadingIndicator(type),
