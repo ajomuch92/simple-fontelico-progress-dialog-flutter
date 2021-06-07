@@ -91,6 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('Iphone'),
             ),
             SizedBox(height: 10.0,),
+            ElevatedButton(
+              onPressed: (){
+                _showDialog(context, SimpleFontelicoProgressDialogType.custom, 'Custom');
+              }, 
+              child: Text('Custom'),
+            ),
+            SizedBox(height: 10.0,),
           ],
         ),
       ),
@@ -102,10 +109,12 @@ class _MyHomePageState extends State<MyHomePage> {
     if(_dialog == null) {
       _dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
     }
-    _dialog.show(message: text, type: type, horizontal: true, width: 150.0, height: 75.0);
+    if(type == SimpleFontelicoProgressDialogType.custom) {
+      _dialog.show(message: text, type: type, width: 150.0, height: 75.0, loadingIndicator: Text('C', style: TextStyle(fontSize: 24.0),));
+    } else {
+      _dialog.show(message: text, type: type, horizontal: true, width: 150.0, height: 75.0, hideText: true);
+    }
     await Future.delayed(Duration(seconds: 2));
-    _dialog.updateMessageText('Updating...');
-    await Future.delayed(Duration(seconds: 1));
     _dialog.hide();
   }
 }

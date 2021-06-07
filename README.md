@@ -3,6 +3,12 @@
 This package helps to render a progress dialog window with different types of loading indicator.
 
 
+### New Features 💥
+* Property hideText to hide the text (and spacer) to only show loading indicator
+* The custom type added. When the type is set to custom, you require to add a loadingIndicator widget
+* Method updateMessageText to update the message text on dialog while is showing
+* Property horizontal to show the loading on this mode
+
 ## Instalation
 Include `simple_fontellico_progress_dialog` in your `pubspec.yaml` file:
 
@@ -62,6 +68,8 @@ To show a dialog, use the show method, to hide it, use the hide method. Simple l
 | horizontal  | Boolean value to indicate if loading has to show on horizontal | False   | false |
 | separation  | Double value to indicate the separation between loading and text | False   | 10.0 |
 | textStyle  | Style to customize the text inside dialog | False   | TextStyle(fontSize: 14) |
+| hideText  | Boolean value to hide the text widget | False   | false |
+| loadingIndicator  | Widget to use when type is set on custom.  | False (Required when type is custom)  |  |
 
 ### Properties used on updateMessageText method
 

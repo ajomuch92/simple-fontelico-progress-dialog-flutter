@@ -11,7 +11,8 @@ enum SimpleFontelicoProgressDialogType {
   refresh,
   hurricane,
   iphone,
-  phoenix
+  phoenix,
+  custom
 }
 
 class SimpleFontelicoProgressDialog {
@@ -32,6 +33,9 @@ class SimpleFontelicoProgressDialog {
 
   /// Duration for animation
   final Duration? duration;
+
+  /// Widget indicator when custom is selected
+  Widget? _customLoadingIndicator;
 
   SimpleFontelicoProgressDialog(
       {this.context,
@@ -95,6 +99,8 @@ class SimpleFontelicoProgressDialog {
             size: 40.0,
           ),
         );
+      case SimpleFontelicoProgressDialogType.custom:
+        return _customLoadingIndicator!;
       case SimpleFontelicoProgressDialogType.normal:
       default:
         return CircularProgressIndicator();
@@ -111,6 +117,8 @@ class SimpleFontelicoProgressDialog {
   /// horizontal: Boolean value to indicate if loading has to show on horizontal
   /// separation: Double value to indicate the separation between loading and text
   /// textStyle: Style to customize the text inside dialog
+  /// hideText: Boolean value to hide the text widget
+  /// loadingIndicator: Widget to use when type is custom
   void show(
       {@required String? message,
       SimpleFontelicoProgressDialogType type =
@@ -122,8 +130,14 @@ class SimpleFontelicoProgressDialog {
       Color backgroundColor = Colors.white,
       bool horizontal = false,
       double separation = 10.0,
-      TextStyle textStyle = const TextStyle(fontSize: 14)}) {
+      TextStyle textStyle = const TextStyle(fontSize: 14),
+      bool hideText = false,
+      Widget? loadingIndicator}) {
     assert(context != null, 'Context must not be null');
+    if(type == SimpleFontelicoProgressDialogType.custom) {
+      assert(loadingIndicator != null, 'Loading indicator must not be null when is custom');
+      _customLoadingIndicator = loadingIndicator;
+    }
     _isOpen = true;
     _message = message;
     showDialog(
@@ -150,14 +164,14 @@ class SimpleFontelicoProgressDialog {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: _getChildren(type, _message, horizontal,
-                              separation, textStyle),
+                              separation, textStyle, hideText),
                         )
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: _getChildren(type, _message, horizontal,
-                              separation, textStyle),
+                              separation, textStyle, hideText),
                         ),
                 ),
               );
@@ -188,7 +202,13 @@ class SimpleFontelicoProgressDialog {
       String? message,
       bool horizontal,
       double separation,
-      TextStyle textStyle) {
+      TextStyle textStyle,
+      bool hideText) {
+    if(hideText) {
+      return [
+        _getLoadingIndicator(type)
+      ];
+    }
     return [
       _getLoadingIndicator(type),
       !horizontal
