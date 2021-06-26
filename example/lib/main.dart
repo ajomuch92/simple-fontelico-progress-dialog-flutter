@@ -112,9 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
     if(type == SimpleFontelicoProgressDialogType.custom) {
       _dialog.show(message: text, type: type, width: 150.0, height: 75.0, loadingIndicator: Text('C', style: TextStyle(fontSize: 24.0),));
     } else {
-      _dialog.show(message: text, type: type, horizontal: true, width: 150.0, height: 75.0, hideText: true);
+      _dialog.show(message: text, type: type, horizontal: true, width: 150.0, height: 75.0, hideText: true, indicatorColor: Colors.red);
     }
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 5));
     _dialog.hide();
   }
 }

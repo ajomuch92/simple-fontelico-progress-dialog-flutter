@@ -37,6 +37,9 @@ class SimpleFontelicoProgressDialog {
   /// Widget indicator when custom is selected
   Widget? _customLoadingIndicator;
 
+  /// Color value to set the indicator color
+  Color? _indicatorColor;
+
   SimpleFontelicoProgressDialog(
       {this.context,
       this.barrierDimisable,
@@ -50,7 +53,7 @@ class SimpleFontelicoProgressDialog {
           duration: this.duration,
           child: Icon(
             Fontelico.threelines,
-            color: Colors.blue[600],
+            color: _indicatorColor,
             size: 40.0,
           ),
         );
@@ -59,7 +62,7 @@ class SimpleFontelicoProgressDialog {
           duration: this.duration,
           child: Icon(
             Fontelico.multilines,
-            color: Colors.blue[600],
+            color: _indicatorColor,
             size: 40.0,
           ),
         );
@@ -68,7 +71,7 @@ class SimpleFontelicoProgressDialog {
           duration: this.duration,
           child: Icon(
             Fontelico.refresh,
-            color: Colors.blue[600],
+            color: _indicatorColor,
             size: 40.0,
           ),
         );
@@ -77,7 +80,7 @@ class SimpleFontelicoProgressDialog {
           duration: this.duration,
           child: Icon(
             Fontelico.hurricane,
-            color: Colors.blue[600],
+            color: _indicatorColor,
             size: 40.0,
           ),
         );
@@ -86,7 +89,7 @@ class SimpleFontelicoProgressDialog {
           duration: this.duration,
           child: Icon(
             Fontelico.iphone,
-            color: Colors.blue[600],
+            color: _indicatorColor,
             size: 40.0,
           ),
         );
@@ -95,7 +98,7 @@ class SimpleFontelicoProgressDialog {
           duration: this.duration,
           child: Icon(
             Fontelico.phoenix,
-            color: Colors.blue[600],
+            color: _indicatorColor,
             size: 40.0,
           ),
         );
@@ -103,19 +106,21 @@ class SimpleFontelicoProgressDialog {
         return _customLoadingIndicator!;
       case SimpleFontelicoProgressDialogType.normal:
       default:
-        return CircularProgressIndicator();
+        return CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(_indicatorColor!));
     }
   }
 
   /// message: String to indicate a message into the dialog. Required
   /// type: Simple dialog type (normal, threeline, multiline, refresh, hurricane, phoenix, iphone)
-  /// height: Double value to indicate the dialog height
-  /// width: Double value to indicate the dialog width
-  /// radius: Double value to indicate the dialog border radius
-  /// elevation: Double value to indicate the dialog elevation
-  /// backgroundColor: Double value to indicate the dialog background color
-  /// horizontal: Boolean value to indicate if loading has to show on horizontal
-  /// separation: Double value to indicate the separation between loading and text
+  /// height: Double value to set the dialog height
+  /// width: Double value to set the dialog width
+  /// radius: Double value to set the dialog border radius
+  /// elevation: Double value to set the dialog elevation
+  /// backgroundColor: Color value to set the dialog background color
+  /// indicatorColor: Color value to set the indicator color
+  /// horizontal: Boolean value to set if loading has to show on horizontal
+  /// separation: Double value to set the separation between loading and text
   /// textStyle: Style to customize the text inside dialog
   /// hideText: Boolean value to hide the text widget
   /// loadingIndicator: Widget to use when type is custom
@@ -128,12 +133,14 @@ class SimpleFontelicoProgressDialog {
       double radius = 5.0,
       double elevation = 5.0,
       Color backgroundColor = Colors.white,
+      Color? indicatorColor,
       bool horizontal = false,
       double separation = 10.0,
       TextStyle textStyle = const TextStyle(fontSize: 14),
       bool hideText = false,
       Widget? loadingIndicator}) {
     assert(context != null, 'Context must not be null');
+    _indicatorColor = indicatorColor ?? Colors.blue[600];
     if (type == SimpleFontelicoProgressDialogType.custom) {
       assert(loadingIndicator != null,
           'Loading indicator must not be null when is custom');
@@ -146,37 +153,41 @@ class SimpleFontelicoProgressDialog {
         barrierDismissible: barrierDimisable!,
         useSafeArea: true,
         builder: (BuildContext context) {
-          return Dialog(
-            backgroundColor: Colors.transparent,
-            insetPadding: EdgeInsets.all(0.0),
-            child: StatefulBuilder(
-                builder: (BuildContext _, StateSetter setState) {
-              _setState = setState;
-              return Center(
-                child: Container(
-                  height: height,
-                  width: width,
-                  decoration: BoxDecoration(
-                      color: backgroundColor,
-                      borderRadius: BorderRadius.all(Radius.circular(radius))),
-                  child: !horizontal
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: _getChildren(type, _message, horizontal,
-                              separation, textStyle, hideText),
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: _getChildren(type, _message, horizontal,
-                              separation, textStyle, hideText),
-                        ),
-                ),
-              );
-            }),
+          return WillPopScope(
+            onWillPop: () => Future.value(barrierDimisable),
+            child: Dialog(
+              backgroundColor: Colors.transparent,
+              insetPadding: EdgeInsets.all(0.0),
+              child: StatefulBuilder(
+                  builder: (BuildContext _, StateSetter setState) {
+                _setState = setState;
+                return Center(
+                  child: Container(
+                    height: height,
+                    width: width,
+                    decoration: BoxDecoration(
+                        color: backgroundColor,
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(radius))),
+                    child: !horizontal
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: _getChildren(type, _message, horizontal,
+                                separation, textStyle, hideText),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: _getChildren(type, _message, horizontal,
+                                separation, textStyle, hideText),
+                          ),
+                  ),
+                );
+              }),
+            ),
           );
         });
   }
@@ -198,6 +209,7 @@ class SimpleFontelicoProgressDialog {
     }
   }
 
+  /// Method to get the children inside the dialog
   List<Widget> _getChildren(
       SimpleFontelicoProgressDialogType type,
       String? message,
