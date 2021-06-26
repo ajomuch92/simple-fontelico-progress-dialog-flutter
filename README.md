@@ -4,10 +4,8 @@ This package helps to render a progress dialog window with different types of lo
 
 
 ### New Features 💥
-* Property hideText to hide the text (and spacer) to only show loading indicator
-* The custom type added. When the type is set to custom, you require to add a loadingIndicator widget
-* Method updateMessageText to update the message text on dialog while is showing
-* Property horizontal to show the loading on this mode
+* Preventing the physical back button of android hiding the loading modal
+* Setting a prop into the showDialog function to change the indicator color
 
 ## Instalation
 Include `simple_fontellico_progress_dialog` in your `pubspec.yaml` file:
