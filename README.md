@@ -55,16 +55,17 @@ To show a dialog, use the show method, to hide it, use the hide method. Simple l
 
 |  Name | Description   | Required   | Default   |
 | ------------ | ------------ | ------------ | ------------ |
-| message  | String to indicate a message into the dialog | True   |   |
+| message  | String to set a message into the dialog | True   |   |
 | type  | Simple dialog type (normal, threeline, multiline, refresh, hurricane, phoenix, iphone) |  False  |  normal |
-| width  | Double value to indicate the dialog width | False   | 100 |
-| height  | Double value to indicate the dialog height | False   | 120  |
-| elevation  | Double value to indicate the dialog elevation| False   |  5.0 |
-| radius  | Double value to indicate the dialog border radius | False   |  5.0 |
-| backgroundColor  | Double value to indicate the dialog background color | False   | Colors.white  |
+| width  | Double value to set the dialog width | False   | 100 |
+| height  | Double value to set the dialog height | False   | 120  |
+| elevation  | Double value to set the dialog elevation| False   |  5.0 |
+| radius  | Double value to set the dialog border radius | False   |  5.0 |
+| backgroundColor  | Color value to set the dialog background color | False   | Colors.white  |
+| indicatorColor  | Color value to set the indicator color | False   | Colors.blue[600] |
 | duration  | Duration value to animate loading indicator | False   | 1000 miliseconds  |
-| horizontal  | Boolean value to indicate if loading has to show on horizontal | False   | false |
-| separation  | Double value to indicate the separation between loading and text | False   | 10.0 |
+| horizontal  | Boolean value to set if loading has to show on horizontal | False   | false |
+| separation  | Double value to set the separation between loading and text | False   | 10.0 |
 | textStyle  | Style to customize the text inside dialog | False   | TextStyle(fontSize: 14) |
 | hideText  | Boolean value to hide the text widget | False   | false |
 | loadingIndicator  | Widget to use when type is set on custom.  | False (Required when type is custom)  |  |

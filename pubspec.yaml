@@ -1,6 +1,6 @@
 name: simple_fontellico_progress_dialog
 description: This package helps you to render a progress dialog with different types of loading indicator.
-version: 0.1.4
+version: 0.1.5
 homepage: https://github.com/ajomuch92/simple-fontelico-progress-dialog-flutter
 
 environment:
