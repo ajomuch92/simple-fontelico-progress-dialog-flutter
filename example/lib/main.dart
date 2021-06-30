@@ -48,54 +48,83 @@ class _MyHomePageState extends State<MyHomePage> {
               }, 
               child: Text('Normal'),
             ),
-            SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.threelines, 'Three Lines');
               }, 
               child: Text('Three Lines'),
             ),
-            SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.multilines, 'Multilines');
               }, 
               child: Text('Multilines'),
             ),
-            SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.refresh, 'Refresh');
               }, 
               child: Text('Refresh'),
             ),
-            SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.phoenix, 'Phoenix');
               }, 
               child: Text('Phoenix'),
             ),
-            SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.hurricane, 'Hurricane');
               }, 
               child: Text('Hurricane'),
             ),
-            SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.iphone, 'Iphone');
               }, 
               child: Text('Iphone'),
             ),
-            SizedBox(height: 10.0,),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.custom, 'Custom');
               }, 
               child: Text('Custom'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                _showDialog(context, SimpleFontelicoProgressDialogType.spinner, 'Spinner');
+              }, 
+              child: Text('Spinner'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                _showDialog(context, SimpleFontelicoProgressDialogType.cog, 'Cog');
+              }, 
+              child: Text('Cog'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                _showDialog(context, SimpleFontelicoProgressDialogType.redo, 'Redo');
+              }, 
+              child: Text('Redo'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                _showDialog(context, SimpleFontelicoProgressDialogType.notch, 'Notch');
+              }, 
+              child: Text('Notch'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                _showDialog(context, SimpleFontelicoProgressDialogType.bullets, 'Bullets');
+              }, 
+              child: Text('Bullets'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                _showDialog(context, SimpleFontelicoProgressDialogType.multiHurricane, 'MultiHurricane');
+              }, 
+              child: Text('MultiHurricane'),
             ),
             SizedBox(height: 10.0,),
           ],
@@ -114,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       _dialog.show(message: text, type: type, horizontal: true, width: 150.0, height: 75.0, hideText: true, indicatorColor: Colors.red);
     }
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 1));
     _dialog.hide();
   }
 }
