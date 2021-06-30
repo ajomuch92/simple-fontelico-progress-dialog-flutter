@@ -12,6 +12,12 @@ enum SimpleFontelicoProgressDialogType {
   hurricane,
   iphone,
   phoenix,
+  notch,
+  spinner,
+  cog,
+  redo,
+  bullets,
+  multiHurricane,
   custom
 }
 
@@ -98,6 +104,60 @@ class SimpleFontelicoProgressDialog {
           duration: this.duration,
           child: Icon(
             Fontelico.phoenix,
+            color: _indicatorColor,
+            size: 40.0,
+          ),
+        );
+      case SimpleFontelicoProgressDialogType.notch:
+        return RotateIcon(
+          duration: this.duration,
+          child: Icon(
+            Fontelico.notch,
+            color: _indicatorColor,
+            size: 40.0,
+          ),
+        );
+      case SimpleFontelicoProgressDialogType.spinner:
+        return RotateIcon(
+          duration: this.duration,
+          child: Icon(
+            Fontelico.spinner,
+            color: _indicatorColor,
+            size: 40.0,
+          ),
+        );
+      case SimpleFontelicoProgressDialogType.cog:
+        return RotateIcon(
+          duration: this.duration,
+          child: Icon(
+            Fontelico.cog,
+            color: _indicatorColor,
+            size: 40.0,
+          ),
+        );
+      case SimpleFontelicoProgressDialogType.redo:
+        return RotateIcon(
+          duration: this.duration,
+          child: Icon(
+            Fontelico.redo,
+            color: _indicatorColor,
+            size: 40.0,
+          ),
+        );
+      case SimpleFontelicoProgressDialogType.bullets:
+        return RotateIcon(
+          duration: this.duration,
+          child: Icon(
+            Fontelico.bullets,
+            color: _indicatorColor,
+            size: 40.0,
+          ),
+        );
+      case SimpleFontelicoProgressDialogType.multiHurricane:
+        return RotateIcon(
+          duration: this.duration,
+          child: Icon(
+            Fontelico.multiHurricane,
             color: _indicatorColor,
             size: 40.0,
           ),
