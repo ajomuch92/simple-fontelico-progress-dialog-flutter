@@ -4,9 +4,9 @@ This package helps to render a progress dialog window with different types of lo
 
 
 ### New Features 💥
-* Preventing the physical back button of android hiding the loading modal
-* Setting a prop into the showDialog function to change the indicator color
-* New icons to show into the dialog: Bullets, multiHurricane, spinner, cog, redo and notch
+* Preventing the physical back button of android hiding the loading modal.
+* Setting a prop into the showDialog function to change the indicator color.
+* New icons to show into the dialog: Bullets, MultiHurricane, Spinner, Cog, Redo and Notch.
 
 ## Instalation
 Include `simple_fontellico_progress_dialog` in your `pubspec.yaml` file:
@@ -25,7 +25,7 @@ dependencies:
 
 ## Usage
 
-To use this package, just import it into your file, create a new instance, pass the context as parameter.
+To use this package, just import it into your file, create a new instance, pass the context as parameter(required).
 
 ```dart
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
