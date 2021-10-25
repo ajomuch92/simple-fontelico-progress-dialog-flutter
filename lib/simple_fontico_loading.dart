@@ -197,6 +197,7 @@ class SimpleFontelicoProgressDialog {
       bool horizontal = false,
       double separation = 10.0,
       TextStyle textStyle = const TextStyle(fontSize: 14),
+      TextAlign textAlign = TextAlign.center,
       bool hideText = false,
       Widget? loadingIndicator}) {
     assert(context != null, 'Context must not be null');
@@ -235,14 +236,14 @@ class SimpleFontelicoProgressDialog {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: _getChildren(type, _message, horizontal,
-                                separation, textStyle, hideText),
+                                separation, textStyle, textAlign, hideText),
                           )
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: _getChildren(type, _message, horizontal,
-                                separation, textStyle, hideText),
+                                separation, textStyle, textAlign, hideText),
                           ),
                   ),
                 );
@@ -276,6 +277,7 @@ class SimpleFontelicoProgressDialog {
       bool horizontal,
       double separation,
       TextStyle textStyle,
+      TextAlign textAlign,
       bool hideText) {
     if (hideText) {
       return [_getLoadingIndicator(type)];
@@ -292,6 +294,7 @@ class SimpleFontelicoProgressDialog {
       Text(
         message!,
         style: textStyle,
+        textAlign: textAlign,
       )
     ];
   }

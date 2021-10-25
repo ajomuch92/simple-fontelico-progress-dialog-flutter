@@ -68,6 +68,7 @@ To show a dialog, use the show method, to hide it, use the hide method. Simple l
 | horizontal  | Boolean value to set if loading has to show on horizontal | False   | false |
 | separation  | Double value to set the separation between loading and text | False   | 10.0 |
 | textStyle  | Style to customize the text inside dialog | False   | TextStyle(fontSize: 14) |
+| textAlign  | Alignment of the message | False   | TextAlign.center |
 | hideText  | Boolean value to hide the text widget | False   | false |
 | loadingIndicator  | Widget to use when type is set on custom.  | False (Required when type is custom)  |  |
 
