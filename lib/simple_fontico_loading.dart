@@ -184,6 +184,7 @@ class SimpleFontelicoProgressDialog {
   /// textStyle: Style to customize the text inside dialog
   /// hideText: Boolean value to hide the text widget
   /// loadingIndicator: Widget to use when type is custom
+  /// textAlign: Value to align the text
   void show(
       {@required String? message,
       SimpleFontelicoProgressDialogType type =
