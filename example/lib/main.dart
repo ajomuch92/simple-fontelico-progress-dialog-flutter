@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -30,13 +30,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  SimpleFontelicoProgressDialog _dialog;
+  SimpleFontelicoProgressDialog? _dialog;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Simple Fontellico Progress Dialog Demo'),
+        title: const Text('Simple Fontellico Progress Dialog Demo'),
       ),
       body: Center(
         child: Column(
@@ -46,87 +46,87 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.normal, 'Normal');
               }, 
-              child: Text('Normal'),
+              child: const Text('Normal'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.threelines, 'Three Lines');
               }, 
-              child: Text('Three Lines'),
+              child: const Text('Three Lines'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.multilines, 'Multilines');
               }, 
-              child: Text('Multilines'),
+              child: const Text('Multilines'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.refresh, 'Refresh');
               }, 
-              child: Text('Refresh'),
+              child: const Text('Refresh'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.phoenix, 'Phoenix');
               }, 
-              child: Text('Phoenix'),
+              child: const Text('Phoenix'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.hurricane, 'Hurricane');
               }, 
-              child: Text('Hurricane'),
+              child: const Text('Hurricane'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.iphone, 'Iphone');
               }, 
-              child: Text('Iphone'),
+              child: const Text('Iphone'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.custom, 'Custom');
               }, 
-              child: Text('Custom'),
+              child: const Text('Custom'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.spinner, 'Spinner');
               }, 
-              child: Text('Spinner'),
+              child: const Text('Spinner'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.cog, 'Cog');
               }, 
-              child: Text('Cog'),
+              child: const Text('Cog'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.redo, 'Redo');
               }, 
-              child: Text('Redo'),
+              child: const Text('Redo'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.notch, 'Notch');
               }, 
-              child: Text('Notch'),
+              child: const Text('Notch'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.bullets, 'Bullets');
               }, 
-              child: Text('Bullets'),
+              child: const Text('Bullets'),
             ),
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.multiHurricane, 'MultiHurricane');
               }, 
-              child: Text('MultiHurricane'),
+              child: const Text('MultiHurricane'),
             ),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
           ],
         ),
       ),
@@ -135,15 +135,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _showDialog(BuildContext context, SimpleFontelicoProgressDialogType type, String text) async{
-    if(_dialog == null) {
-      _dialog = SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
-    }
+    _dialog ??= SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
     if(type == SimpleFontelicoProgressDialogType.custom) {
-      _dialog.show(message: text, type: type, width: 150.0, height: 75.0, loadingIndicator: Text('C', style: TextStyle(fontSize: 24.0),));
+      _dialog!.show(message: text, type: type, width: 150.0, height: 75.0, loadingIndicator: const Text('C', style: TextStyle(fontSize: 24.0),));
     } else {
-      _dialog.show(message: text, type: type, horizontal: true, width: 150.0, height: 75.0, hideText: true, indicatorColor: Colors.red);
+      _dialog!.show(message: text, type: type, horizontal: true, width: 150.0, height: 75.0, hideText: true, indicatorColor: Colors.red);
     }
-    await Future.delayed(Duration(seconds: 1));
-    _dialog.hide();
+    await Future.delayed(const Duration(seconds: 1));
+    _dialog!.hide();
   }
 }
