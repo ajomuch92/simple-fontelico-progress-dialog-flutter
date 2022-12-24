@@ -232,36 +232,34 @@ class SimpleFontelicoProgressDialog {
             child: Dialog(
               backgroundColor: Colors.transparent,
               insetPadding: EdgeInsets.all(0.0),
-              child: StatefulBuilder(
-                builder: (context, setState) {
-                  this.setState = setState;
-                  return Center(
-                    child: Container(
-                      height: height,
-                      width: width,
-                      decoration: BoxDecoration(
-                          color: backgroundColor,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(radius))),
-                      child: !horizontal
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: _getChildren(type, horizontal,
-                                  separation, textStyle, textAlign, hideText),
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: _getChildren(type, horizontal,
-                                  separation, textStyle, textAlign, hideText),
-                            ),
-                    ),
-                  );
-                }
-              ),
+              child: StatefulBuilder(builder: (context, setState) {
+                this.setState = setState;
+                return Center(
+                  child: Container(
+                    height: height,
+                    width: width,
+                    decoration: BoxDecoration(
+                        color: backgroundColor,
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(radius))),
+                    child: !horizontal
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: _getChildren(type, horizontal, separation,
+                                textStyle, textAlign, hideText),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: _getChildren(type, horizontal, separation,
+                                textStyle, textAlign, hideText),
+                          ),
+                  ),
+                );
+              }),
             ),
           );
         });
