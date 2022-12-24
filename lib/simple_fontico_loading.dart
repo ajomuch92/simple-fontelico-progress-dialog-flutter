@@ -25,8 +25,11 @@ class SimpleFontelicoProgressDialog {
   /// Value to indicate if dialog is open
   bool _isOpen = false;
 
-  /// Value notifier to change the message on flight
-  final ValueNotifier<String> notifier = ValueNotifier<String>('');
+  /// String value to set the main message inside the alert dialog
+  String message = '';
+
+  /// State Setter used to update the message inside the alert dialog
+  late StateSetter setState;
 
   /// Context to render the dialog
   final BuildContext context;
@@ -218,7 +221,7 @@ class SimpleFontelicoProgressDialog {
       _customLoadingIndicator = loadingIndicator;
     }
     _isOpen = true;
-    notifier.value = message;
+    this.message = message;
     showDialog(
         context: context,
         barrierDismissible: barrierDimisable,
@@ -229,30 +232,35 @@ class SimpleFontelicoProgressDialog {
             child: Dialog(
               backgroundColor: Colors.transparent,
               insetPadding: EdgeInsets.all(0.0),
-              child: Center(
-                child: Container(
-                  height: height,
-                  width: width,
-                  decoration: BoxDecoration(
-                      color: backgroundColor,
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(radius))),
-                  child: !horizontal
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: _getChildren(type, notifier.value, horizontal,
-                              separation, textStyle, textAlign, hideText),
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: _getChildren(type, notifier.value, horizontal,
-                              separation, textStyle, textAlign, hideText),
-                        ),
-                ),
+              child: StatefulBuilder(
+                builder: (context, setState) {
+                  this.setState = setState;
+                  return Center(
+                    child: Container(
+                      height: height,
+                      width: width,
+                      decoration: BoxDecoration(
+                          color: backgroundColor,
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(radius))),
+                      child: !horizontal
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: _getChildren(type, horizontal,
+                                  separation, textStyle, textAlign, hideText),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: _getChildren(type, horizontal,
+                                  separation, textStyle, textAlign, hideText),
+                            ),
+                    ),
+                  );
+                }
               ),
             ),
           );
@@ -270,14 +278,15 @@ class SimpleFontelicoProgressDialog {
   /// Method to update the message text when dialog is open
   void updateMessageText(String message) {
     if (_isOpen) {
-      notifier.value = message;
+      setState(() {
+        this.message = message;
+      });
     }
   }
 
   /// Method to get the children inside the dialog
   List<Widget> _getChildren(
       SimpleFontelicoProgressDialogType type,
-      String? message,
       bool horizontal,
       double separation,
       TextStyle textStyle,
@@ -296,7 +305,7 @@ class SimpleFontelicoProgressDialog {
               width: separation,
             ),
       Text(
-        message!,
+        message,
         style: textStyle,
         textAlign: textAlign,
       )
