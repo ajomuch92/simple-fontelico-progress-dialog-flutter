@@ -7,6 +7,7 @@ This package helps to render a progress dialog window with different types of lo
 * Internal improvements.
 * Optional parameters on constructor.
 * Fixing bugs
+* Updating example
 
 ## Instalation
 Include `simple_fontellico_progress_dialog` in your `pubspec.yaml` file:
