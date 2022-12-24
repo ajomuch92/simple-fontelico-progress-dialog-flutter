@@ -14,7 +14,7 @@ class RotateIcon extends StatefulWidget {
 class _RotateIconState extends State<RotateIcon>
     with SingleTickerProviderStateMixin {
   /// Controller to animate the children
-  AnimationController? _animationController;
+  late AnimationController _animationController;
 
   /// Widget (icon) to show into the dialog
   final Widget? child;
@@ -22,33 +22,34 @@ class _RotateIconState extends State<RotateIcon>
   /// Duration for the animation
   final Duration? duration;
 
-  _RotateIconState({this.child, this.duration = const Duration(seconds: 1)}) {
-    _animationController = new AnimationController(
-      vsync: this,
-      duration: duration,
-    );
-  }
+  _RotateIconState({this.child, this.duration = const Duration(seconds: 1)});
 
   @override
   void initState() {
     super.initState();
-    _animationController!.repeat();
+    if (mounted) {
+      _animationController = new AnimationController(
+        vsync: this,
+        duration: duration,
+      );
+      _animationController.repeat();
+    }
   }
 
   @override
   void dispose() {
-    _animationController!.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _animationController!,
+      animation: _animationController,
       child: child,
       builder: (BuildContext context, Widget? _widget) {
         return new Transform.rotate(
-          angle: _animationController!.value * 6.3,
+          angle: _animationController.value * 6.3,
           child: _widget,
         );
       },
