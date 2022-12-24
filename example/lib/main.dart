@@ -39,14 +39,30 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Simple Fontellico Progress Dialog Demo'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: GridView.count(
+          primary: false,
+          padding: const EdgeInsets.all(20),
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+          crossAxisCount: 2,
           children: <Widget>[
             ElevatedButton(
               onPressed: (){
                 _showDialog(context, SimpleFontelicoProgressDialogType.normal, 'Normal');
               }, 
               child: const Text('Normal'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                _showDialog(context, SimpleFontelicoProgressDialogType.normal, 'Normal Vertical');
+              }, 
+              child: const Text('Normal Vertical'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                _showDialog(context, SimpleFontelicoProgressDialogType.normal, 'Updating');
+              }, 
+              child: const Text('Updating'),
             ),
             ElevatedButton(
               onPressed: (){
@@ -135,11 +151,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _showDialog(BuildContext context, SimpleFontelicoProgressDialogType type, String text) async{
-    _dialog ??= SimpleFontelicoProgressDialog(context: context, barrierDimisable:  false);
+    _dialog ??= SimpleFontelicoProgressDialog(context: context);
     if(type == SimpleFontelicoProgressDialogType.custom) {
       _dialog!.show(message: text, type: type, width: 150.0, height: 75.0, loadingIndicator: const Text('C', style: TextStyle(fontSize: 24.0),));
+    } else if (text == 'Normal Vertical') {
+      _dialog!.show(message: text, type: SimpleFontelicoProgressDialogType.normal, horizontal: false, width: 150.0, height: 75.0, hideText: false, indicatorColor: Colors.red);
+    } else if (text == 'Updating') {
+      _dialog!.show(message: text, type: SimpleFontelicoProgressDialogType.normal, horizontal: true, width: 150.0, height: 75.0, hideText: false, indicatorColor: Colors.red);
+      await Future.delayed(const Duration(seconds: 1));
+      _dialog!.updateMessageText('Changing text');
     } else {
-      _dialog!.show(message: text, type: type, horizontal: true, width: 150.0, height: 75.0, hideText: true, indicatorColor: Colors.red);
+      _dialog!.show(message: text, type: type, horizontal: true, width: 150.0, height: 75.0, hideText: false, indicatorColor: Colors.red);
     }
     await Future.delayed(const Duration(seconds: 1));
     _dialog!.hide();
