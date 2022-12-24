@@ -25,17 +25,14 @@ class SimpleFontelicoProgressDialog {
   /// Value to indicate if dialog is open
   bool _isOpen = false;
 
-  /// String to set the message on the dialog
-  String? _message = '';
-
-  /// StateSetter to make available the function to update message text inside an opened dialog
-  StateSetter? _setState;
+  /// Value notifier to change the message on flight
+  final ValueNotifier<String> notifier = ValueNotifier<String>('');
 
   /// Context to render the dialog
-  BuildContext? context;
+  final BuildContext context;
 
   /// Bool value to indicate the barrierDismisable of the dialog
-  final bool? barrierDimisable;
+  final bool barrierDimisable;
 
   /// Duration for animation
   final Duration? duration;
@@ -47,15 +44,17 @@ class SimpleFontelicoProgressDialog {
   Color? _indicatorColor;
 
   SimpleFontelicoProgressDialog(
-      {this.context,
-      this.barrierDimisable,
+      {required this.context,
+      this.barrierDimisable = false,
       this.duration = const Duration(milliseconds: 1000)});
 
   /// Method to render the widget into the dialog
   Widget _getLoadingIndicator(SimpleFontelicoProgressDialogType type) {
+    Key key = UniqueKey();
     switch (type) {
       case SimpleFontelicoProgressDialogType.threelines:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.threelines,
@@ -65,6 +64,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.multilines:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.multilines,
@@ -74,6 +74,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.refresh:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.refresh,
@@ -83,6 +84,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.hurricane:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.hurricane,
@@ -92,6 +94,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.iphone:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.iphone,
@@ -101,6 +104,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.phoenix:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.phoenix,
@@ -110,6 +114,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.notch:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.notch,
@@ -119,6 +124,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.spinner:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.spinner,
@@ -128,6 +134,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.cog:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.cog,
@@ -137,6 +144,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.redo:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.redo,
@@ -146,6 +154,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.bullets:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.bullets,
@@ -155,6 +164,7 @@ class SimpleFontelicoProgressDialog {
         );
       case SimpleFontelicoProgressDialogType.multiHurricane:
         return RotateIcon(
+          key: key,
           duration: this.duration,
           child: Icon(
             Fontelico.multiHurricane,
@@ -186,7 +196,7 @@ class SimpleFontelicoProgressDialog {
   /// loadingIndicator: Widget to use when type is custom
   /// textAlign: Value to align the text
   void show(
-      {@required String? message,
+      {required String message,
       SimpleFontelicoProgressDialogType type =
           SimpleFontelicoProgressDialogType.normal,
       double height = 100,
@@ -201,7 +211,6 @@ class SimpleFontelicoProgressDialog {
       TextAlign textAlign = TextAlign.center,
       bool hideText = false,
       Widget? loadingIndicator}) {
-    assert(context != null, 'Context must not be null');
     _indicatorColor = indicatorColor ?? Colors.blue[600];
     if (type == SimpleFontelicoProgressDialogType.custom) {
       assert(loadingIndicator != null,
@@ -209,10 +218,10 @@ class SimpleFontelicoProgressDialog {
       _customLoadingIndicator = loadingIndicator;
     }
     _isOpen = true;
-    _message = message;
+    notifier.value = message;
     showDialog(
-        context: context!,
-        barrierDismissible: barrierDimisable!,
+        context: context,
+        barrierDismissible: barrierDimisable,
         useSafeArea: true,
         builder: (BuildContext context) {
           return WillPopScope(
@@ -220,35 +229,31 @@ class SimpleFontelicoProgressDialog {
             child: Dialog(
               backgroundColor: Colors.transparent,
               insetPadding: EdgeInsets.all(0.0),
-              child: StatefulBuilder(
-                  builder: (BuildContext _, StateSetter setState) {
-                _setState = setState;
-                return Center(
-                  child: Container(
-                    height: height,
-                    width: width,
-                    decoration: BoxDecoration(
-                        color: backgroundColor,
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(radius))),
-                    child: !horizontal
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: _getChildren(type, _message, horizontal,
-                                separation, textStyle, textAlign, hideText),
-                          )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: _getChildren(type, _message, horizontal,
-                                separation, textStyle, textAlign, hideText),
-                          ),
-                  ),
-                );
-              }),
+              child: Center(
+                child: Container(
+                  height: height,
+                  width: width,
+                  decoration: BoxDecoration(
+                      color: backgroundColor,
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(radius))),
+                  child: !horizontal
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: _getChildren(type, notifier.value, horizontal,
+                              separation, textStyle, textAlign, hideText),
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: _getChildren(type, notifier.value, horizontal,
+                              separation, textStyle, textAlign, hideText),
+                        ),
+                ),
+              ),
             ),
           );
         });
@@ -257,17 +262,15 @@ class SimpleFontelicoProgressDialog {
   /// Method to hide the dialog
   void hide() {
     if (_isOpen) {
-      Navigator.of(context!).pop();
+      Navigator.of(context).pop();
       _isOpen = false;
     }
   }
 
   /// Method to update the message text when dialog is open
   void updateMessageText(String message) {
-    if (_isOpen && _setState != null) {
-      _setState!(() {
-        _message = message;
-      });
+    if (_isOpen) {
+      notifier.value = message;
     }
   }
 
